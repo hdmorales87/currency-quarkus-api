@@ -1,0 +1,11 @@
+services:
+  bd:
+    image: mariadb:11.2-jammy
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATASOURCE_PASSWORD}
+      MYSQL_DATABASE: ${DATASOURCE_NAME}
+    volumes:
+      - ./db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"

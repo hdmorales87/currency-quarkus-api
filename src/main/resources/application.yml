@@ -1,0 +1,42 @@
+quarkus:
+  http:
+    port: 8081
+    root-path: /
+  rest:
+    path: /api/v1
+  datasource:
+    db-kind: mariadb
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+    jdbc:
+      url: ${DATASOURCE_URL}
+  hibernate-orm:
+    database:
+      generation: update
+    log:
+      sql: false
+  devservices:
+    enabled: false
+
+  rest-client:
+    freecurrencyapi:
+      url: ${EXCHANGE_RATE_API_URL}
+      scope: jakarta.inject.Singleton
+      connect-timeout: 5000
+      read-timeout: 5000
+
+  log:
+    category:
+      "org.eclipse.microprofile.rest.client":
+        level: DEBUG
+      "com.pruebaquarkus.infrastructure.external":
+        level: DEBUG
+
+freecurrencyapi:
+  key: ${EXCHANGE_RATE_API_KEY}
+  
+"%dev":
+  quarkus:
+    hibernate-orm:
+      log:
+        sql: true
